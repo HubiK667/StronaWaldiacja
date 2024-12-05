@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logowanie i Quiz</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px 30px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        form, .quiz-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-size: 1em;
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+        input, select {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+        button {
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            background-color: blueviolet;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #30034b;
+        }
+        .quiz-section {
+            display: none;
+            margin-top: 20px;
+        }
+        .error {
+        color: red; /* Kolor tekstu błędu */
+        font-size: 14px; /* Opcjonalnie zmień rozmiar czcionki */
+        margin-top: 5px; /* Dodaj odstęp nad błędem */
+    }       
+            
+        
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Rejestracja</h1>
+        
+
+    
+        <form id="loginForm">
+            <div>
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" placeholder="Wpisz swój e-mail">
+            </div>
+            <div>
+                <label for="userName">Nazwa użytkownika:</label>
+                <input type="text" id="userName" name="userName" placeholder="Wpisz nazwę użytkownika"> 
+            </div>
+            <div>
+                <label for="password">Hasło:</label>
+                <input type="password" id="password" name="password" placeholder="Wpisz swoje hasło">
+            </div>
+            <div>
+                <label for="passwordConfirm">Potwierdź hasło:</label>
+                <input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="Wpisz ponownie hasło">
+            </div>
+            
+            <button type="submit">Zarejestruj konto</button>
+        </form>
+
+       
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+    <script>
+       
+
+        $(document).ready(function () {
+            
+            $("#loginForm").validate({
+                rules: {
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6
+                    },
+                    userName:{
+                        required: true,
+                        minlength: 3
+                    },
+                    passwordConfirm:{
+                        required: true,
+                        minlength: 6
+                    }
+                },
+                messages: {
+                    email: {
+                        required: "Proszę wpisac e-mail.",
+                        email: "Proszę wpisać poprawny adres e-mail."
+                    },
+                    password: {
+                        required: "Proszę wpisać hasło.",
+                        minlength: "Hasło musi miec co najmniej 6 znakow."
+                    },
+                    userName: {
+                        required: "Proszę wpisać nazwę użytkownika.",
+                        minlength: "Nazwa użytkownika musi mieć conajmniej 3 litery"
+                    },
+                    passwordConfirm: {
+                        required: "Proszę potwierdzić hasło.",
+                        minlength: "Hasło musi miec co najmniej 6 znakow."
+                    },
+                },
+                submitHandler: function () {
+                    const password = $("#password").val();
+                    const passwordConfirm = $("#passwordConfirm").val();
+
+                    if (password==passwordConfirm) {
+                        alert("Pomyślnie zarejestrowono");
+                        
+                    } else {
+                        alert("Hasła muszą się zgadzać");
+                    }
+                    return false; 
+                }
+            });
+        });
+    </script>
+</body>
+</html>
